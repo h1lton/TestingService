@@ -1,0 +1,10 @@
+.link-test {
+    color: #fff;
+    text-decoration: none;
+}
+
+.link-test:hover {
+    color: #0A84FF;
+    transition: color 0.3s ease-in-out;
+    text-decoration: none;
+}

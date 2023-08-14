@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block navbar-center %}
+    <span class="navbar-brand">{{ title }}</span>
+{% endblock %}
+{% block content %}
+    <div class="justify-content-center text-center">
+        <div class="text-center my-5">
+            <div class="progress" style="height: 5px;" id="pg-bar">
+                <div class="progress-bar bg-info" style="width: {{ progress }}%"></div>
+            </div>
+            <label for="pg-bar">{{ passed|add:1 }} из {{ total }}</label>
+        </div>
+        <div class="text-center m-4">
+            <span style="font-size: 20px">{{ question }}</span>
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            <div class="w-100">
+                <div class="btn-group-vertical">
+                    {% for answer in question.answer_set.all %}
+                        <input type="radio" class="btn-check" name="answer"
+                               id="answer{{ answer.id }}" value="{{ answer.id }}">
+                        <label class="btn btn-outline-info" for="answer{{ answer.id }}">{{ answer }}</label>
+                    {% endfor %}
+                </div>
+                {% if form.errors %}
+                    <div class="text-danger">Выберите ответ</div>
+                {% endif %}
+            </div>
+            <button type="submit" class="btn btn-info mt-3">
+                Следующий
+            </button>
+        </form>
+        {% if passed != 0 %}
+            <button onclick="location.href='{% url 'start_over' test_id %}'" class="btn btn-outline-info btn-sm mt-2 opacity-75">
+                Начать заново
+            </button>
+        {% endif %}
+    </div>
+{% endblock %}

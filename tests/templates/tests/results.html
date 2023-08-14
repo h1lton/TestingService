@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block navbar-center %}
+    <span class="navbar-brand">{{ title }}</span>
+{% endblock %}
+{% block content %}
+    <div class="justify-content-center text-center">
+        <div class="text-center my-5">
+            <div class="progress" style="height: 5px;" id="pg-bar">
+                <div class="progress-bar bg-info" style="width: 100%"></div>
+            </div>
+            <label for="pg-bar">{{ total }} из {{ total }}</label>
+        </div>
+        <div class="text-center m-4">
+            <span style="font-size: 20px">Количество правильных ответов: {{ results }}</span>
+        </div>
+        <button onclick="location.href='{% url 'start_over' test_id %}'" class="btn btn-outline-info btn-sm mt-2">
+            Начать заново
+        </button>
+        <div>
+            {% for question in questions %}
+                <div class="card m-5 text-bg-dark border-2 shadow-lg">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ question }}</h5>
+                    </div>
+                    <ul class="list-group">
+                        {% for answer in question.answer_set.all %}
+                            <li class="list-group-item border-0 text-white bg-{% if answer.result_set.exists %}{% if answer.is_true %}success{% else %}danger{% endif %}{% else %}dark{% endif %}">
+                                {{ answer }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+        <button onclick="location.href='{% url 'start_over' test_id %}'" class="btn btn-outline-info btn-sm mt-2">
+            Начать заново
+        </button>
+    </div>
+{% endblock %}
