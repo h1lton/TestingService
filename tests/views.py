@@ -21,6 +21,12 @@ class TestListView(ListView):
 
 
 @login_required
+def start_over(request, test_id):
+    Result.objects.filter(question__test_id=test_id, user_id=request.user.id).delete()
+    return redirect('test', test_id)
+
+
+@login_required
 def test_view(request, test_id):
     results = Result.objects.filter(question__test_id=test_id, user_id=request.user.id)
     passed = results.count()
