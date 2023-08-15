@@ -1,7 +1,5 @@
 # TestingService
 
-___
-
 <p align="center">
 <img src="tests/static/img/logo.png" alt="" width="25%">
 </p>
@@ -19,7 +17,7 @@ ___
 5. `pip install -r requirements.txt`
 6. `py manage.py runserver`
 
-Все готово, открывайте и тестите.
+Все готово, открывайте.
 
 ___
 
@@ -75,7 +73,7 @@ ___
 
 ### Создание тестов
 
-Осуществляется с помощью админ панели:
+С помощью админ панели:
 <p align="center">
 <img src="screenshots/create_tests_admin.png" alt="">
 </p>
@@ -85,6 +83,16 @@ ___
     + То что должен быть хотя-бы 1 вопрос.
     + На то что должен быть хотя-бы 1 правильный и неправильный ответ.
 + django-nested-admin он делает вложенный Inline в Inline.
+
+С помощью shell:
+
+`py manage.py shell`
+
+```python
+from terminal_assistant import *
+```
+
+Этот файл очень помогает в работе с бд, все импорты и функции можете посмотреть в самом файле, я все их продукоментировал.
 
 ___
 
